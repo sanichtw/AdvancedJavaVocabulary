@@ -43,8 +43,7 @@ public class HelloController {
                 if (entry.getValue().equals(changeableWord)) {
                     collection.replace(entry.getKey(), textField.getText());
 
-                    collectionListView.getItems().clear();
-                    translationListView.getItems().clear();
+                    clearListsView();
 
                     collectionListView.getItems().addAll(collection.keySet());
                     Collection<String> translationValues = collection.values();
@@ -70,8 +69,7 @@ public class HelloController {
                     collection.remove(entry.getKey(), entry.getValue());
                     collection.put(textField.getText(), valueOfKey);
 
-                    collectionListView.getItems().clear();
-                    translationListView.getItems().clear();
+                    clearListsView();
 
                     collectionListView.getItems().addAll(collection.keySet());
                     Collection<String> translationValues = collection.values();
@@ -93,8 +91,7 @@ public class HelloController {
         if (selectedIndicesFromCollection != null) {
             collection.remove(selectedIndicesFromCollection);
 
-            collectionListView.getItems().clear();
-            translationListView.getItems().clear();
+            clearListsView();
 
             collectionListView.getItems().addAll(collection.keySet());
             Collection<String> translationValues = collection.values();
@@ -109,8 +106,7 @@ public class HelloController {
                 }
             }
         }
-        collectionListView.getItems().clear();
-        translationListView.getItems().clear();
+        clearListsView();
         collectionListView.getItems().addAll(collection.keySet());
         Collection<String> translationValues = collection.values();
         translationListView.getItems().addAll(translationValues);
@@ -120,7 +116,7 @@ public class HelloController {
     }
 
     public void closeApplication() {
-        try(FileWriter writer = new FileWriter("data.txt", false)) {
+        try (FileWriter writer = new FileWriter("data.txt", false)) {
             writer.write(String.valueOf(collection));
             writer.flush();
         } catch (IOException ex){
@@ -129,5 +125,10 @@ public class HelloController {
 
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void clearListsView() {
+        collectionListView.getItems().clear();
+        translationListView.getItems().clear();
     }
 }
