@@ -16,10 +16,6 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 563, 434);
         stage.setTitle("Vocabulary");
 
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(e -> Platform.exit());
-
-
         stage.setScene(scene);
         stage.show();
     }
